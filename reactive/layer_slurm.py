@@ -1,5 +1,5 @@
-from charmhelpers.fetch import apt_install
-from charmhelpers.fetch import get_upstream_version
+###from charmhelpers.fetch import apt_install
+###from charmhelpers.fetch import get_upstream_version
 from charmhelpers.core.hookenv import status_set
 from charmhelpers.core.hookenv import application_version_set
 
@@ -16,10 +16,11 @@ def install_slurm():
 
     # Install packages
     packages = [SLURM_PACKAGE]
-    apt_install(packages)
+###    apt_install(packages)
 
     # Set Slurm version
-    application_version_set(
-        get_upstream_version(SLURM_PACKAGE))
+    application_version_set('18.08.3')
+###    application_version_set(
+###        get_upstream_version(SLURM_PACKAGE))
 
     set_state('slurm.installed')
