@@ -19,7 +19,7 @@ def install_slurm():
 ###    apt_install(packages)
 
     # Set Slurm version
-    application_version_set('18.08.3')
+    application_version_set('18.08.5.2')
 ###    application_version_set(
 ###        get_upstream_version(SLURM_PACKAGE))
 
