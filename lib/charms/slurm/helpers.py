@@ -1,5 +1,6 @@
 import os
 import textwrap
+import subprocess
 
 from charmhelpers.core.host import mkdir
 from charmhelpers.core.templating import render
@@ -75,3 +76,18 @@ def create_state_save_location(context):
               owner=context.get('slurm_user'),
               group=context.get('slurm_user'),
               perms=0o750)
+
+
+def get_slurm_version():
+    try:
+        sinfo_process = subprocess.Popen(['/usr/bin/sinfo', '-V'], stdout=subprocess.PIPE)
+        (sinfo_out, sinfo_err) = sinfo_process.communicate()
+        sinfo_process_exit_status = sinfo_process.wait(10)
+        if sinfo_process_exit_status != 0:
+            VERSION = 'Unknown'
+        else:
+            VERSION = sinfo_out.split( )[1]
+    except FileNotFoundError:
+        VERSION = None
+
+    return VERSION
